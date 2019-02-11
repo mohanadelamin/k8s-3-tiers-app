@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  flaskapp.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            proxy_set_header   Host                 $host;
+            proxy_set_header   X-Real-IP            $remote_addr;
+            proxy_set_header   X-Forwarded-For      $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto    $scheme;
+            proxy_set_header   HOSTNAME             $hostname;
+            proxy_pass_request_headers              on;
+            proxy_pass http://flaskapp:5090;
+        }
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2019-02-10T14:26:16Z"
+  name: basic-config
+  namespace: 3-tiers-app

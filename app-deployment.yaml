@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app
+  namespace: 3-tiers-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        appengine: flaskapp
+    spec:
+      containers:
+      - name: flask-app
+        image: melamin/flaskapp:v1.0
+        imagePullPolicy: "IfNotPresent"
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: paloalto
+        - name: POSTGRES_DB
+          value: flaskapp_db
+        - name: APP_SECRET_KEY
+          value: paloalto_secret_key
+        ports:
+        - containerPort: 5090
+          name: flaskapp

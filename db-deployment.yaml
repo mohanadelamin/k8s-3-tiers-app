@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: db
+  namespace: 3-tiers-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        appdb: postgresdb
+    spec:
+      containers:
+      - name: postgres-db
+        image: postgres:10.4
+        imagePullPolicy: "IfNotPresent"
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: paloalto
+        - name: POSTGRES_DB
+          value: flaskapp_db
+        - name: APP_SECRET_KEY
+          value: paloalto_secret_key
+        ports:
+        - containerPort: 5432
+          name: postgresql

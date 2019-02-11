@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+  namespace: 3-tiers-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        webengine: nginx
+    spec:
+      containers:
+      - name: nginx-web
+        image: nginx:1.15.8
+        ports:
+        - containerPort: 80
+          name: nginx-web
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+        - name: basic-config
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: basic-config
+          configMap:
+            name: basic-config
