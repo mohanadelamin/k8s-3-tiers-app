@@ -1,0 +1,57 @@
+<html>
+    <head>
+    <title>Customer Database</title>
+    </head>
+    <body>
+    <h3>
+        <a href="{{ url_for('home') }}">Customer Database</a>
+    </h3>
+    <h2> 
+	{{ ip }} - {{ host }}
+    </h2>
+      {% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      {% endwith %}
+
+    <form action="{{ request.path }}" method="post">
+        Rank:
+        <input type="text" name="rank"><br><br>
+        Name:
+        <input type="text" name="name"><br><br>
+        Universe:
+        <input type="text" name="universe"><br><br>
+        Revenue:
+        <input type="text" name="revenue"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <table border=1 bordercolor=black cellpadding=5 cellspacing=0>
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Universe</th>
+            <th>Revenue</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.rank }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.universe }}</td>
+            <td>{{ customer.revenue }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+</html>

@@ -63,7 +63,7 @@ $ kubectl create -f web-service.yaml
 
 ## Example output
 
-![Example output](https://raw.githubusercontent.com/mohanadelamin/k8s-3-tier3-app/master/exmple_output.png)
+![Example output](https://raw.githubusercontent.com/mohanadelamin/k8s-3-tiers-app/master/exmple_output.png)
 
 
 The Dockerfile for and script for the flaskapp can be found in the flaskapp folder.
